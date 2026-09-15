@@ -9,6 +9,8 @@ import com.example.demo.service.AuthenticationService;
 
 import jakarta.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
+
 @Controller
 public class LoginController {
 
@@ -19,9 +21,22 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String dispLogin() {
+    public String dispLogin(
+        @RequestParam(required = false) String error,
+        Model model) {
+
+        if ("true".equals(error)) {
+            model.addAttribute("errorMessage",
+                    "ユーザーIDまたはパスワードが違います");
+        }
         return "login";
     }
+
+
+    // @GetMapping("/login")
+    // public String dispLogin() {
+    //     return "login";
+    // }
 
     @PostMapping("/login")
     public String execLogin(
@@ -39,8 +54,8 @@ public class LoginController {
             return "redirect:/main";
         }
 
-        // ログイン失敗の場合は、ログイン画面へ
-        return "redirect:/login";
+        // ログイン失敗の場合は、エラーを返す
+        return "redirect:/login?error=true";
     }
 
     @GetMapping("/main")
