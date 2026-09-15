@@ -1,0 +1,3 @@
+CREATE DATABASE java_demo_app;
+
+SHOW DATABASES;
