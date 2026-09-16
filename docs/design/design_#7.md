@@ -16,12 +16,13 @@
 
 |No. | Column name | type | 桁 | description|
 | --- | --- | --- | --- | --- | 
-|1 | task_id | Number | 3 | |
-|2 | user_id | varchar | 255 | |
+|1 | task_id | int |  | レコードを一意に特定するID |
+|2 | user_id | varchar | 255 |　このタスクのユーザーのID |
 |3 | task | varchar | 5000 | 全角文字で100文字まで|
-|4 | due_date | date |  | |
-|5 | priority | number | 1 | 1:高、2: 中、3：低|
-|6 | complete_flg |  | 1 | |
+|4 | due_date | date |  | 期限 |
+|5 | priority | int | 1 | 1:高、2: 中、3：低|
+|6 | complete_flg | char | 1 |　1:完了、0:未完了 |
 |7 | create_date | date |  | システム日付|
 |8 | update_date | date |  | システム日付|
-|9 | del_flg | varchar | 1 | |
+|9 | del_flg | varchar | 1 | 1:削除済、0: 削除未実施 |
+
