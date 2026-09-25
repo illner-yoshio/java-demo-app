@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,16 +58,16 @@ public class LoginController {
         return "redirect:/login?error=true";
     }
 
-    @GetMapping("/main")
-    public String dispMain(HttpSession session) {
+    // @GetMapping("/main")
+    // public String dispMain(HttpSession session) {
 
-        // Sessionにログイン情報がなければ、loginページにリダイレクトする。
-        if (session.getAttribute("loginUser") == null) {
-            return "redirect:/login";
-        }
+    //     // Sessionにログイン情報がなければ、loginページにリダイレクトする。
+    //     if (session.getAttribute("loginUser") == null) {
+    //         return "redirect:/login";
+    //     }
 
-        return "main";
-    }
+    //     return "main";
+    // }
 
     @PostMapping("/logout")
     public String execLogout(HttpSession session) {

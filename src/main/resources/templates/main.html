@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>メイン画面</title>
+    <title>ToDo管理</title>
 </head>
+
 <body>
 
-<h1>メイン画面</h1>
+    <h1>ToDo一覧</h1>
 
-<p>ログインしました。</p>
+    <!-- タスクが0件の場合 -->
+    <div th:if="${#lists.isEmpty(taskList)}">
+        <p>現在、未完了のタスクはありません。</p>
+    </div>
 
-<form action="/logout" method="post">
-    <button type="submit">ログアウト</button>
-</form>
+    <!-- タスクが存在する場合 -->
+    <div th:unless="${#lists.isEmpty(taskList)}">
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>タスク</th>
+                    <th>期日</th>
+                    <th>優先度</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="task, stat : ${taskList}">
+                    <td th:text="${stat.count}"></td>
+                    <td th:text="${task.task}"></td>
+                    <td th:text="${task.dueDate}"></td>
+                    <td th:text="${task.priority}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">ログアウト</button>
+    </form>
 
 </body>
+
 </html>
