@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.example.demo.entity.TaskEntity;
 import com.example.demo.service.TaskService;
+import com.example.demo.model.TaskListDisp;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -40,7 +39,7 @@ public class TaskController {
         String userId = taskService.getUserId(session);
 
         // タスク一覧を取得
-        List<TaskEntity> taskList = taskService.getTaskList(userId);
+        List<TaskListDisp> taskList = taskService.getTaskList(userId);
 
         // 画面へタスク一覧を渡す
         model.addAttribute("taskList", taskList);

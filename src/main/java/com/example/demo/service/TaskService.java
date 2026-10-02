@@ -7,6 +7,7 @@ import com.example.demo.entity.TaskEntity;
 import com.example.demo.model.TaskListDisp;
 import com.example.demo.repository.TaskRepository;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Service
 public class TaskService {
@@ -34,13 +35,8 @@ public class TaskService {
      * @param userId ログインユーザーID
      * @return タスク一覧
      */
-    public TaskListDisp getTaskList(String userId) {
-    //     return taskRepository
-    //             .findByUserIdAndCompleteFlgAndDelFlgOrderByTaskIdAsc(
-    //                     userId,
-    //                     '0',
-    //                     '0'
-    //             );
+    public List<TaskListDisp> getTaskList(String userId) {
+        // DBから未完了・未削除のタスクを取得する
         List<TaskEntity> taskList = 
         taskRepository
             .findByUserIdAndCompleteFlgAndDelFlgOrderByTaskIdAsc(
@@ -49,7 +45,15 @@ public class TaskService {
                 '0'
                 );
 
-        TaskListDisp taskListDisp = convertToDisp(taskList);
+        //  画面表示用のリストを作成
+        List<TaskListDisp> taskListDisp = new ArrayList<>();
+
+        // TaskEntityを1件ずつTaskListDispに変換してリストに追加
+        taskList.forEach(taskEntity -> {
+            TaskListDisp disp = convertToDisp(taskEntity);
+            taskListDisp.add(disp);
+        });
+
         return taskListDisp;
     }
 
